@@ -8,11 +8,14 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 public class Main {
 
-    private static int port = 10000;
+    private static int port = 10002;
 
     public static void main(String[] args) throws InterruptedException {
 
-        final EchoServerHandler handler = new EchoServerHandler();
+        final EchoServerInboundHandler inboundHandler = new EchoServerInboundHandler();
+        final EchoServerOutboundHandler outboundHandler = new EchoServerOutboundHandler();
+
+        final EchoServerInboundHandler inboundHandler2 = new EchoServerInboundHandler();
 
         EventLoopGroup group = new NioEventLoopGroup();
 
@@ -25,7 +28,7 @@ public class Main {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
-                            socketChannel.pipeline().addLast(handler);
+                            socketChannel.pipeline().addLast(inboundHandler).addLast(outboundHandler).addLast(inboundHandler2);
                         }
                     });
 

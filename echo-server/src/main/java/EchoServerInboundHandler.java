@@ -1,16 +1,19 @@
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.channel.*;
 
-public class EchoServerHandler extends ChannelInboundHandlerAdapter {
+public class EchoServerInboundHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         ByteBuf in = (ByteBuf) msg;
         System.out.println("Server receive: " + in.toString());
-        ctx.write(in);
+//        ctx.write(in);
+//        ChannelPipeline pipeline = ctx.pipeline();
+//        pipeline.write(in);
+//        Channel channel = ctx.channel();
+//        channel.write(in);
+//        ctx.fireChannelRead(msg);
     }
 
     @Override

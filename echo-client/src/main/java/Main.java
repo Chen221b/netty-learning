@@ -4,13 +4,12 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
-import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
 public class Main {
 
     private static final String host = "127.0.0.1";
-    private static final int port = 10000;
+    private static final int port = 10002;
 
     public static void main(String[] args) throws InterruptedException {
 
