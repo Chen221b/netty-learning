@@ -1,1 +1,3 @@
 /home/damon/git/netty-demo/echo-server/src/main/java/Main.java
+/home/damon/git/netty-demo/echo-server/src/main/java/EchoServerOutboundHandler.java
+/home/damon/git/netty-demo/echo-server/src/main/java/EchoServerInboundHandler.java

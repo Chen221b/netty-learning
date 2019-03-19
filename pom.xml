@@ -12,6 +12,7 @@
     <modules>
         <module>echo-server</module>
         <module>echo-client</module>
+        <module>chat-server</module>
     </modules>
 
     <properties>
