@@ -1,36 +1,44 @@
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
-public class Main {
+import java.net.InetSocketAddress;
 
-    private static int port = 10002;
+public class RedisServer {
 
-    public static void main(String[] args) throws InterruptedException {
+    private static final Integer PORT = 10000;
 
+    public static void main(String[] args) {
+
+        ServerBootstrap b = new ServerBootstrap();
 
         try {
-            ServerBootstrap b = new ServerBootstrap();
 
             b.group(new NioEventLoopGroup(), new NioEventLoopGroup())
                     .channel(NioServerSocketChannel.class)
-                    .localAddress(port)
+                    .localAddress(new InetSocketAddress(PORT))
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
-                            socketChannel.pipeline()
-                                    .addLast(new EchoServerInboundHandler())
-                                    .addLast(new EchoServerOutboundHandler());
+                            ChannelPipeline pipeline = socketChannel.pipeline();
+                            pipeline.addLast(new RedisDecoder())
+                                    .addLast(new RedisCommandHandler())
+                                    .addLast(new RedisEncoder());
                         }
                     });
 
             ChannelFuture future = b.bind().sync();
             future.channel().closeFuture().sync();
-        }finally {
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
+
     }
+
 }

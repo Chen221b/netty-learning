@@ -1,10 +1,15 @@
 import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.util.concurrent.Future;
+import io.netty.util.concurrent.GenericFutureListener;
+
+import java.util.Scanner;
 
 public class Main {
 
@@ -30,8 +35,15 @@ public class Main {
                         }
                     });
 
-            ChannelFuture f = b.connect().sync();
-            f.channel().closeFuture().sync();
+
+            Channel ch = b.connect().sync().channel();
+
+            Scanner scanner = new Scanner(System.in);
+            while (scanner.hasNext()) {
+                String input = scanner.nextLine();
+            }
+
+
         } finally {
             group.shutdownGracefully().sync();
         }

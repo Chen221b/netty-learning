@@ -13,6 +13,8 @@
         <module>echo-server</module>
         <module>echo-client</module>
         <module>chat-server</module>
+        <module>redis-server</module>
+        <module>redis-client</module>
     </modules>
 
     <properties>

@@ -8,7 +8,10 @@
         <outputRelativeToContentRoot value="true" />
         <module name="chat-server" />
         <module name="echo-client" />
+        <module name="echo-server" />
         <module name="echoserver" />
+        <module name="redis-client" />
+        <module name="redis-server" />
       </profile>
     </annotationProcessing>
   </component>
